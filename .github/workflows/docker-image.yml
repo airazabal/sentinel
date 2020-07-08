@@ -15,8 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      env:
-        tag: $(date +%s) 
+      ::set-env name=tag::$(date +%s)
       run: docker build . --file Dockerfile --tag rhel7-mssql-server:$tag
     - name: tag the docker image
       run: docker tag  rhel7-mssql-server:$tag default-openshift-image-registry.mycluster-dal13-b3c-4x16-0143c5dd31acd8e030a1d6e0ab1380e3-0000.us-south.containers.appdomain.cloud/sentinel/rhel7-mssql-server:$(date +%s)
